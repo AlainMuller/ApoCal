@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="entete">#FFFFFFFF</color>
+    <color name="timer">#FFFFFFFF</color>
+    <color name="entete_shadow">#FF9E9E9E</color>
+    <color name="timer_shadow">#FF991111</color>
+</resources>

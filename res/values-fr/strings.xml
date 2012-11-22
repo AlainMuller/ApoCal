@@ -8,5 +8,7 @@
     <string name="heure">H</string>
     <string name="minute">m</string>
     <string name="seconde">s</string>
-    <string name="description_background">background</string>
+    <string name="description_background">fond</string>
+    <string name="tv_widget">Chargement</string>
+    <string name="clock">Horloge</string>
 </resources>

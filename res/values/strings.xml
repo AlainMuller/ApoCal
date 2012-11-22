@@ -9,4 +9,6 @@
     <string name="minute">m</string>
     <string name="seconde">s</string>
     <string name="description_background">background</string>
+    <string name="tv_widget">Loading ...</string>
+    <string name="clock">Clock</string>
 </resources>

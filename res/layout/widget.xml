@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/llWidget"
+              android:layout_width="170dp"
+              android:layout_height="68dp"
+              android:orientation="horizontal"
+              android:layout_gravity="center"
+              android:layout_margin="10dp"
+              android:padding="10dp"
+              android:background="@drawable/appwidget_dark_bg">
+    <ImageView android:id="@+id/ivWidget"
+               android:layout_width="48dp"
+               android:layout_height="48dp"
+               android:src="@drawable/ic_launcher_apo_clock"
+               android:contentDescription="@string/clock"/>
+
+    <TextView android:id="@+id/tvWidget"
+              android:text="@string/tv_widget"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_gravity="center"
+              android:textColor="@color/timer"
+              android:shadowColor="@color/timer_shadow"
+              android:shadowDx="1"
+              android:shadowDy="1"
+              android:shadowRadius="3"
+              android:textSize="16dp"
+              android:textStyle="bold"/>
+
+</LinearLayout>

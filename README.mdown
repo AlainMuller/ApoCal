@@ -8,7 +8,7 @@ Actuellement en version 1.3, l'application est disponible [ici](https://play.goo
 Basée sur l'estimation du 21 Décembre 2012 (solstice de l'hiver 2012), cette application vous indique en temps réel le temps qu'il reste avant la date fatidique prévue par le calendrier Maya.
 
 ![Portrait](http://www.alainmuller.fr/android/img/framed_20120919_141013.png "Apo Cal en mode portrait")
-![Paysage](http://www.alainmuller.fr/android/img/framed_20120919_141022.png "Apo Cal en mode paysage")
 ![Widget](http://www.alainmuller.fr/android/img/framed_20121122_175705.png "Le widget Apo Cal en action!")
+![Paysage](http://www.alainmuller.fr/android/img/framed_20120919_141022.png "Apo Cal en mode paysage")
 
 _Apo Cal : Soyez à l'heure pour la fin du monde!_

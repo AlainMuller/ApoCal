@@ -1,0 +1,5 @@
+
+ [DONE] * Rendre le widget clickable
+ * Gestion de la date depuis un menu de préférence
+ * Optimisation de l'utilisation du Calendar (refactoring Widget/Activity)
+ * Affichage de boutons Paramètres / A propos dans l'Activity

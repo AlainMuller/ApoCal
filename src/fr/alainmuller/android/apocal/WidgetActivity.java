@@ -1,9 +1,11 @@
 package fr.alainmuller.android.apocal;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import java.util.*;
@@ -16,14 +18,25 @@ import java.util.*;
  * Activity correspondant au widget
  */
 public class WidgetActivity extends AppWidgetProvider {
-    public static String AWESOME_ACTION = "AwesomeAction";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        /* Paramétrage du Widget (rafraîchissement) */
         // Utilisation d'un Timer pour gérer le rafraîchissement du widget
         Timer timer = new Timer();
         // Rafraîchissement prévu toutes les minutes
         timer.scheduleAtFixedRate(new MyTime(context, appWidgetManager), 1, 60000);
+
+        /* Gestion du click sur le Widget */
+        // Récupération de l'élément
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
+        // Création de l'Intent pour afficher l'Activity
+        Intent intent = new Intent(context, CountDownActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        // Mise en place de l'onClickListener sur le Layout du Widget
+        views.setOnClickPendingIntent(R.id.llWidget, pendingIntent);
+        // Mise à jour du Widget
+        appWidgetManager.updateAppWidget(appWidgetIds[0], views);
     }
 
     /**

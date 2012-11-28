@@ -1,7 +1,7 @@
 # Apo Cal #
 
 Projet de développement Android ayant pour but initial de me former à la publication sur Google Play.  
-Actuellement en version 2.0, l'application est disponible [ici](https://play.google.com/store/apps/details?id=fr.alainmuller.android.apocal "Apo Cal sur Google Play").
+Actuellement en version 2.1, l'application est disponible [ici](https://play.google.com/store/apps/details?id=fr.alainmuller.android.apocal "Apo Cal sur Google Play").
 
 ## Apo Cal : Le compte à rebours de l'apocalypse. ##
 

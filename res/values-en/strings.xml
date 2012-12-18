@@ -11,4 +11,6 @@
     <string name="description_background">background</string>
     <string name="tv_widget">Loading ...</string>
     <string name="clock">Clock</string>
+    <string name="iconPrefs">Settings</string>
+    <string name="iconAide">About</string>
 </resources>

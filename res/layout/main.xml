@@ -10,6 +10,24 @@
                android:scaleType="centerCrop"
                android:contentDescription="@string/description_background"/>
 
+    <ImageButton android:id="@+id/ibPrefs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_menu_preferences"
+            android:background="@null"
+            android:contentDescription="@string/iconPrefs"
+            android:layout_alignParentRight="true"/>
+
+    <ImageButton android:id="@+id/ibAide"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="5dp"
+                 android:src="@drawable/ic_menu_help"
+                 android:background="@null"
+                 android:contentDescription="@string/iconAide"
+                 android:layout_alignParentLeft="true"/>
+
     <LinearLayout android:orientation="vertical"
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"

@@ -11,4 +11,6 @@
     <string name="description_background">fond</string>
     <string name="tv_widget">Chargement</string>
     <string name="clock">Horloge</string>
+    <string name="iconPrefs">Préférences</string>
+    <string name="iconAide">A Propos</string>
 </resources>

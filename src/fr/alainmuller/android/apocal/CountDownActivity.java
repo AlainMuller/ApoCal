@@ -3,7 +3,11 @@ package fr.alainmuller.android.apocal;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -25,6 +29,8 @@ public class CountDownActivity extends Activity {
     long min;
     long heure;
     long jour;
+    // Boutons A propos / Réglages
+    ImageButton ibPrefs, ibAide = null;
 
     /**
      * Called when the activity is first created.
@@ -63,7 +69,23 @@ public class CountDownActivity extends Activity {
             counter.start();
         }
 
+        // Click sur préférences
+        ibPrefs = (ImageButton) findViewById(R.id.ibPrefs);
+        ibPrefs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(CountDownActivity.this, "Click sur bouton préférences!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        // Click sur A Propos
+        ibAide = (ImageButton) findViewById(R.id.ibAide);
+        ibAide.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CountDownActivity.this, "Click sur bouton aide!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

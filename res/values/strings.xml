@@ -3,15 +3,16 @@
     <string name="app_name">Apo Cal</string>
     <string name="message">Time left before Armageddon :</string>
     <string name="bye">Bye! ^_^\"</string>
-    <string name="after">Did we survive? ^^\"</string>
+    <string name="after">Time over</string>
     <string name="jour">D</string>
     <string name="heure">H</string>
     <string name="minute">m</string>
     <string name="seconde">s</string>
     <string name="description_background">background</string>
-    <string name="tv_widget">Loading ...</string>
+    <string name="tv_widget">Loading …</string>
     <string name="clock">Clock</string>
     <string name="iconPrefs">Settings</string>
     <string name="iconAide">About</string>
-    <string name="help_text">help</string>
+    <string name="pickDate">Your armageddon\'s date : </string>
+    <string name="helpFile">"file:///android_asset/html/help.html"</string>
 </resources>

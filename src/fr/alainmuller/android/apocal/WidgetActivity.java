@@ -6,6 +6,8 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import java.util.*;
@@ -21,13 +23,17 @@ public class WidgetActivity extends AppWidgetProvider {
 
     private static final String LOG_TAG = "ApoCal - WidgetActivity";
 
+    // On récupère la date de fin depuis les préférences
+    SharedPreferences prefs = null;
+    int prefsAnnee, prefsMois, prefsJour;
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         /* Paramétrage du Widget (rafraîchissement) */
         // Utilisation d'un Timer pour gérer le rafraîchissement du widget
         Timer timer = new Timer();
         // Rafraîchissement prévu toutes les minutes
-        timer.scheduleAtFixedRate(new MyTime(context, appWidgetManager), 1, 60000);
+        timer.scheduleAtFixedRate(new MyTime(context, appWidgetManager), 1, 10000);
 
         /* Gestion du click sur le Widget */
         // Récupération de l'élément
@@ -61,11 +67,16 @@ public class WidgetActivity extends AppWidgetProvider {
 
         @Override
         public void run() {
-            // On récupère la date de la fin du monde (21/12/2012)
+            // Chargement des données depuis les préférences
+            prefs = PreferenceManager.getDefaultSharedPreferences(contexte);
+            prefsAnnee = prefs.getInt("annee", 2012);
+            prefsMois = prefs.getInt("mois", 11);
+            prefsJour = prefs.getInt("jour", 21);
+
             Calendar fin = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
-            fin.set(Calendar.YEAR, 2012);
-            fin.set(Calendar.MONTH, Calendar.DECEMBER);
-            fin.set(Calendar.DAY_OF_MONTH, 21);
+            fin.set(Calendar.YEAR, prefsAnnee);
+            fin.set(Calendar.MONTH, prefsMois);
+            fin.set(Calendar.DAY_OF_MONTH, prefsJour);
             fin.set(Calendar.HOUR, 0);
             fin.set(Calendar.MINUTE, 0);
             fin.set(Calendar.SECOND, 0);

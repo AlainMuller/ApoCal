@@ -42,7 +42,8 @@ public class HelpDialog extends Dialog {
 
         // Chargement de l'aide (page HTML)
         WebView wvHelpText = (WebView) findViewById(R.id.wvHelpText);
-        wvHelpText.loadUrl("file:///android_asset/html/aide.html");
+        wvHelpText.loadUrl(mContext.getString(R.string.helpFile));
+//        wvHelpText.loadUrl("file:///android_asset/html/aide.html");
     }
 
     /**

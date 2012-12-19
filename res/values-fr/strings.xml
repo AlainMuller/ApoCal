@@ -3,7 +3,7 @@
     <string name="app_name">Apo Cal</string>
     <string name="message">Temps restant avant la fin du monde :</string>
     <string name="bye">Adieu! ^_^\"</string>
-    <string name="after">On a survécu?! ^_^\"</string>
+    <string name="after">Délai écoulé</string>
     <string name="jour">J</string>
     <string name="heure">H</string>
     <string name="minute">m</string>
@@ -13,4 +13,6 @@
     <string name="clock">Horloge</string>
     <string name="iconPrefs">Préférences</string>
     <string name="iconAide">A Propos</string>
+    <string name="pickDate">Votre fin du monde : </string>
+    <string name="helpFile">"file:///android_asset/html/aide.html"</string>
 </resources>

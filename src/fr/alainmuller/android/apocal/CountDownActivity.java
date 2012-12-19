@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +21,12 @@ import java.util.TimeZone;
  * Created with IntelliJ IDEA.
  * User: Alain Muller
  * Date: 18/09/12
- * Time: 17:28
+ * Time: 17:28          ==> installations actives/totales 3 mois plus tard : 1 321 / 2 274 ^_^
  * Activity permettant de tracer un compte à rebours en se basant sur la date de l'apocalypse selon le calendrier Maya
  */
 public class CountDownActivity extends Activity {
+
+    private static final String LOG_TAG = "ApoCal - CountDownActivity";
 
     TextView tvTimer = null;
     MonCompteur counter = null;
@@ -29,8 +35,11 @@ public class CountDownActivity extends Activity {
     long min;
     long heure;
     long jour;
-    // Boutons A propos / Réglages
+    // Boutons Aide / Réglages
     ImageButton ibPrefs, ibAide = null;
+    RelativeLayout rlMain = null;
+    // Affichage / Masquage des boutons
+    boolean visible = false;
 
     /**
      * Called when the activity is first created.
@@ -69,7 +78,7 @@ public class CountDownActivity extends Activity {
             counter.start();
         }
 
-        // Click sur préférences
+        // Click sur Préférences
         ibPrefs = (ImageButton) findViewById(R.id.ibPrefs);
         ibPrefs.setOnClickListener(new OnClickListener() {
             @Override
@@ -78,16 +87,50 @@ public class CountDownActivity extends Activity {
             }
         });
 
-        // Click sur A Propos
+        // Click sur Aide
         ibAide = (ImageButton) findViewById(R.id.ibAide);
         ibAide.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CountDownActivity.this, "Click sur bouton aide!", Toast.LENGTH_SHORT).show();
+                HelpDialog helpDialog = new HelpDialog(view.getContext());
+                helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                helpDialog.show();
+            }
+        });
+
+        // Gestion du click sur l'Activity : afficher / masquer les boutons
+        rlMain = (RelativeLayout) findViewById(R.id.rlMain);
+        rlMain.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showHideMenu();
             }
         });
     }
 
+    /**
+     * Méthode permettant d'afficher ou masquer les boutons en fonction du booléen visible
+     */
+    private void showHideMenu() {
+        // On affiche ou masque les boutons en fonction de l'état de visible
+        int visibility = visible ? View.INVISIBLE : View.VISIBLE;
+        // Mise à jour de la visibilité des boutons
+        ibAide.setVisibility(visibility);
+        ibPrefs.setVisibility(visibility);
+        // Chargement de l'animation de fadein / fadeout
+        Animation animation = AnimationUtils.loadAnimation(this, visible ? R.anim.fadeout : R.anim.fadein);
+        if (animation != null) {
+            // Réinitialisation de l'état de l'animation
+            animation.reset();
+            // Nettoyage / Annulation de tout animation éventuelle en cours
+            ibAide.clearAnimation();
+            ibPrefs.clearAnimation();
+            ibAide.startAnimation(animation);
+            ibPrefs.startAnimation(animation);
+        }
+        // Alternance de l'état visible / invisible
+        visible = !visible;
+    }
 
     /**
      * Classe étendant la classe abstraite CountDownTimer

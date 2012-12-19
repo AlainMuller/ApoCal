@@ -1,5 +1,11 @@
 
- [DONE] * Rendre le widget clickable
+ #### Work In Progress ####
+ Aide et DatePicker pour préférences.
+    ==> Virer date.png et remplacer l'image par une vraie capture.
+
  * Gestion de la date depuis un menu de préférence
  * Optimisation de l'utilisation du Calendar (refactoring Widget/Activity)
- * Affichage de boutons Paramètres / A propos dans l'Activity
+ * Internationaliser les chaines et fichiers d'aide HTML
+
+[DONE] * Rendre le widget clickable
+[DONE] * Affichage de boutons Paramètres / A propos dans l'Activity

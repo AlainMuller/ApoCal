@@ -19,6 +19,8 @@ import java.util.*;
  */
 public class WidgetActivity extends AppWidgetProvider {
 
+    private static final String LOG_TAG = "ApoCal - WidgetActivity";
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         /* Paramétrage du Widget (rafraîchissement) */

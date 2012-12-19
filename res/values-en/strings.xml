@@ -13,4 +13,5 @@
     <string name="clock">Clock</string>
     <string name="iconPrefs">Settings</string>
     <string name="iconAide">About</string>
+    <string name="help_text">help</string>
 </resources>

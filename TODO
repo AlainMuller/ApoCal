@@ -1,11 +1,9 @@
 
  #### Work In Progress ####
- Aide et DatePicker pour préférences.
-    ==> Virer date.png et remplacer l'image par une vraie capture.
 
- * Gestion de la date depuis un menu de préférence
  * Optimisation de l'utilisation du Calendar (refactoring Widget/Activity)
- * Internationaliser les chaines et fichiers d'aide HTML
 
+[DONE] * Internationaliser les chaines et fichiers d'aide HTML
+[DONE] * Gestion de la date depuis un menu de préférence
 [DONE] * Rendre le widget clickable
 [DONE] * Affichage de boutons Paramètres / A propos dans l'Activity

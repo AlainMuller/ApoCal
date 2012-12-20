@@ -5,7 +5,9 @@ Actuellement en version 2.2, l'application est disponible [ici](https://play.goo
 
 ## Apo Cal : Le compte à rebours de l'apocalypse. ##
 
-Basée sur l'estimation du 21 Décembre 2012 (solstice de l'hiver 2012), cette application vous indique en temps réel le temps qu'il reste avant la date fatidique prévue par le calendrier Maya.
+Initialement basée sur l'estimation du 21 Décembre 2012 (solstice de l'hiver 2012), cette application vous indique en temps réel le temps qu'il reste avant la date fatidique prévue par le calendrier Maya.
+
+Elle permet d'afficher le temps restant avant la fin du monde. Cette date pouvant être personnalisée en fonction de chacun (examen à passer, entretien avec votre responsable, opération chirurgicale, sortie d'un nouvel album de Justin Bieber, ...).
 
 ![Portrait](http://www.alainmuller.fr/android/img/framed_20120919_141013.png "Apo Cal en mode portrait")
 ![Widget](http://www.alainmuller.fr/android/img/framed_20121122_175705.png "Le widget Apo Cal en action!")
@@ -15,5 +17,5 @@ _Apo Cal : Soyez à l'heure pour la fin du monde!_
 
 ## Changelog ##
 
- +   2.2 [ **WORK IN PROGRESS** ] - Ajout de boutons d'aide et de réglage des préférences.
+ +   2.2 - Ajout de boutons d'aide et de réglage des préférences. Possibilité de choisir sa propre date de fin du monde.
  +   2.1 - Nouveau Widget cliquable pour un rapide aperçu du temps qu'il vous reste.

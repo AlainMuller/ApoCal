@@ -45,7 +45,7 @@ public class CountDownActivity extends Activity {
     boolean visible = false;
     // On récupère la date de fin depuis les préférences
     SharedPreferences prefs = null;
-    int prefsAnnee, prefsMois, prefsJour;
+    int prefsAnnee, prefsMois, prefsJour, prefsHeure, prefsMinute, prefsSeconde;
 
     /**
      * Called when the activity is first created.
@@ -74,6 +74,10 @@ public class CountDownActivity extends Activity {
                         prefs.edit().putInt("annee", datePicker.getYear()).commit();
                         prefs.edit().putInt("mois", datePicker.getMonth()).commit();
                         prefs.edit().putInt("jour", datePicker.getDayOfMonth()).commit();
+                        // Par défaut, on met l'heure à 00:00:00 si on a choisi une date
+                        prefs.edit().putInt("heure", 0).commit();
+                        prefs.edit().putInt("minute", 0).commit();
+                        prefs.edit().putInt("seconde", 0).commit();
                         // Mise à jour des préférences et du compteur
                         chargeDateFin();
                         startCountdown();
@@ -115,13 +119,16 @@ public class CountDownActivity extends Activity {
     }
 
     /**
-     * Chargement des données depuis les préférences ou initialisation à la date du 21/12/2012
+     * Chargement des données depuis les préférences ou initialisation à la date du 19/01/2038 03:14:07 par défaut
      */
     private void chargeDateFin() {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        prefsAnnee = prefs.getInt("annee", 2012);
-        prefsMois = prefs.getInt("mois", 11);
-        prefsJour = prefs.getInt("jour", 21);
+        prefsAnnee = prefs.getInt("annee", 2038);
+        prefsMois = prefs.getInt("mois", 0);
+        prefsJour = prefs.getInt("jour", 19);
+        prefsHeure = prefs.getInt("heure", 3);
+        prefsMinute = prefs.getInt("minute", 14);
+        prefsSeconde = prefs.getInt("seconde", 7);
     }
 
     /**
@@ -138,9 +145,9 @@ public class CountDownActivity extends Activity {
         fin.set(Calendar.YEAR, prefsAnnee);
         fin.set(Calendar.MONTH, prefsMois);
         fin.set(Calendar.DAY_OF_MONTH, prefsJour);
-        fin.set(Calendar.HOUR, 0);
-        fin.set(Calendar.MINUTE, 0);
-        fin.set(Calendar.SECOND, 0);
+        fin.set(Calendar.HOUR, prefsHeure);
+        fin.set(Calendar.MINUTE, prefsMinute);
+        fin.set(Calendar.SECOND, prefsSeconde);
         fin.set(Calendar.MILLISECOND, 0);
         fin.set(Calendar.AM_PM, Calendar.AM);
 

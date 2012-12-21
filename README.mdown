@@ -1,13 +1,15 @@
 # Apo Cal #
 
 Projet de développement Android ayant pour but initial de me former à la publication sur Google Play.  
-Actuellement en version 2.2, l'application est disponible [ici](https://play.google.com/store/apps/details?id=fr.alainmuller.android.apocal "Apo Cal sur Google Play").
+Actuellement en version 2.3, l'application est disponible [ici](https://play.google.com/store/apps/details?id=fr.alainmuller.android.apocal "Apo Cal sur le Google Play Store").
 
 ## Apo Cal : Le compte à rebours de l'apocalypse. ##
 
 Initialement basée sur l'estimation du 21 Décembre 2012 (solstice de l'hiver 2012), cette application vous indique en temps réel le temps qu'il reste avant la date fatidique prévue par le calendrier Maya.
+Et non, les Mayas n'avaient pas prédit la fin du monde, mais la fin du cinquième cycle de leur calendrier.
+Non, la [véritable fin du monde](http://fr.wikipedia.org/wiki/Bug_de_l'an_2038 "Bug de l'an 2038 sur Wikipedia"), elle, aura bien lieu un peu plus tard, le 19 janvier 2038 à 3h 14min 7s précisément.
 
-Elle permet d'afficher le temps restant avant la fin du monde. Cette date pouvant être personnalisée en fonction de chacun (examen à passer, entretien avec votre responsable, opération chirurgicale, sortie d'un nouvel album de Justin Bieber, ...).
+Cette application permet ainsi d'afficher le temps restant avant la fin du monde, mais comme ce n'est pas pour tout de suite, cette date peut être personnalisée en fonction de chacun (examen à passer, entretien avec votre responsable, opération chirurgicale, sortie d'un nouvel album de Justin Bieber, ...).
 
 ![Portrait](http://www.alainmuller.fr/android/img/framed_20120919_141013.png "Apo Cal en mode portrait")
 ![Widget](http://www.alainmuller.fr/android/img/framed_20121122_175705.png "Le widget Apo Cal en action!")
@@ -17,5 +19,6 @@ _Apo Cal : Soyez à l'heure pour la fin du monde!_
 
 ## Changelog ##
 
+ +   2.3 - Mise à jour de la date de fin du monde en fonction du bug de l'an 2038 (ou bug POSIX)
  +   2.2 - Ajout de boutons d'aide et de réglage des préférences. Possibilité de choisir sa propre date de fin du monde.
  +   2.1 - Nouveau Widget cliquable pour un rapide aperçu du temps qu'il vous reste.

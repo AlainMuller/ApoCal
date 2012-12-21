@@ -22,10 +22,9 @@ import java.util.*;
 public class WidgetActivity extends AppWidgetProvider {
 
     private static final String LOG_TAG = "ApoCal - WidgetActivity";
-
     // On récupère la date de fin depuis les préférences
     SharedPreferences prefs = null;
-    int prefsAnnee, prefsMois, prefsJour;
+    int prefsAnnee, prefsMois, prefsJour, prefsHeure, prefsMinute, prefsSeconde;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -69,17 +68,20 @@ public class WidgetActivity extends AppWidgetProvider {
         public void run() {
             // Chargement des données depuis les préférences
             prefs = PreferenceManager.getDefaultSharedPreferences(contexte);
-            prefsAnnee = prefs.getInt("annee", 2012);
-            prefsMois = prefs.getInt("mois", 11);
-            prefsJour = prefs.getInt("jour", 21);
+            prefsAnnee = prefs.getInt("annee", 2038);
+            prefsMois = prefs.getInt("mois", 0);
+            prefsJour = prefs.getInt("jour", 19);
+            prefsHeure = prefs.getInt("heure", 3);
+            prefsMinute = prefs.getInt("minute", 14);
+            prefsSeconde = prefs.getInt("seconde", 7);
 
             Calendar fin = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
             fin.set(Calendar.YEAR, prefsAnnee);
             fin.set(Calendar.MONTH, prefsMois);
             fin.set(Calendar.DAY_OF_MONTH, prefsJour);
-            fin.set(Calendar.HOUR, 0);
-            fin.set(Calendar.MINUTE, 0);
-            fin.set(Calendar.SECOND, 0);
+            fin.set(Calendar.HOUR, prefsHeure);
+            fin.set(Calendar.MINUTE, prefsMinute);
+            fin.set(Calendar.SECOND, prefsSeconde);
             fin.set(Calendar.MILLISECOND, 0);
             fin.set(Calendar.AM_PM, Calendar.AM);
 
@@ -98,9 +100,19 @@ public class WidgetActivity extends AppWidgetProvider {
                 long min = ((millisUntilFinished - milli - sec) / (1000 * 60) % 60);
                 long heure = ((millisUntilFinished - milli - sec - min) / (1000 * 60 * 60) % 24);
                 long jour = ((millisUntilFinished - milli - sec - min - heure) / (1000 * 60 * 60 * 24));
-                remoteViews.setTextViewText(R.id.tvWidget, String.format("%02d", jour) + contexte.getString(R.string.jour) + " "
-                        + String.format("%02d", heure) + contexte.getString(R.string.heure) + " "
-                        + String.format("%02d", min) + contexte.getString(R.string.minute));
+
+                // Affichage du temps restant
+                StringBuffer message = new StringBuffer();
+
+                // Si au moins un jour restant, on l'affiche
+                if (jour > 0)
+                    message.append(String.format("%02d", jour)).append(contexte.getString(R.string.jour)).append(" ");
+                message.append(String.format("%02d", heure)).append(contexte.getString(R.string.heure));
+                // Si plus de 99 jours restants, on n'affiche pas les minutes
+                if (jour < 100)
+                    message.append(" ").append(String.format("%02d", min)).append(contexte.getString(R.string.minute));
+
+                remoteViews.setTextViewText(R.id.tvWidget, message);
             }
             // Mise à jour du widget
             appWidgetManager.updateAppWidget(thisWidget, remoteViews);

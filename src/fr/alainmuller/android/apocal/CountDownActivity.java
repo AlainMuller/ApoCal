@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,26 +27,22 @@ import java.util.TimeZone;
  * Created with IntelliJ IDEA.
  * User: Alain Muller
  * Date: 18/09/12
- * Time: 17:28          ==> installations actives/totales 3 mois plus tard : 1 321 / 2 274 ^_^
+ * Time: 17:28          ==> installations actives/totales le 21/12/2012 : 1 500 / 2 500 ^_^
  * Activity permettant de tracer un compte à rebours en se basant sur la date de l'apocalypse selon le calendrier Maya
  */
 public class CountDownActivity extends Activity {
 
     private static final String LOG_TAG = "ApoCal - CountDownActivity";
-    TextView tvTimer = null;
-    MonCompteur counter = null;
-    long milli;
-    long sec;
-    long min;
-    long heure;
-    long jour;
+    private TextView tvTimer = null;
+    private MonCompteur counter = null;
     // Boutons Aide / Réglages
-    ImageButton ibPrefs, ibAide = null;
+    private ImageButton ibPrefs;
+    private ImageButton ibAide = null;
     // Affichage / Masquage des boutons
-    boolean visible = false;
+    private boolean visible = false;
     // On récupère la date de fin depuis les préférences
-    SharedPreferences prefs = null;
-    int prefsAnnee, prefsMois, prefsJour, prefsHeure, prefsMinute, prefsSeconde;
+    private SharedPreferences prefs = null;
+    private int prefsAnnee, prefsMois, prefsJour, prefsHeure, prefsMinute, prefsSeconde;
 
     /**
      * Called when the activity is first created.
@@ -61,6 +58,7 @@ public class CountDownActivity extends Activity {
         // Chargement de la date de fin du monde depuis les préférences
         chargeDateFin();
 
+        // TODO : Utilisation d'un DateTimePicker pour choisir une heure particulière en plus de la date
         // Bouton Préférences : affichage d'un DatePickerDialog pour MàJ date de fin du monde
         ibPrefs = (ImageButton) findViewById(R.id.ibPrefs);
         ibPrefs.setOnClickListener(new OnClickListener() {
@@ -118,6 +116,13 @@ public class CountDownActivity extends Activity {
         startCountdown();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Affichage/masquage des boutons
+        showHideMenu();
+        return false;
+    }
+
     /**
      * Chargement des données depuis les préférences ou initialisation à la date du 19/01/2038 03:14:07 par défaut
      */
@@ -141,6 +146,7 @@ public class CountDownActivity extends Activity {
             counter = null;
         }
 
+        // TODO : Un peu de refactoring sur ce code (partagé avec le widget)
         Calendar fin = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
         fin.set(Calendar.YEAR, prefsAnnee);
         fin.set(Calendar.MONTH, prefsMois);
@@ -162,7 +168,7 @@ public class CountDownActivity extends Activity {
             long diff = fin.getTimeInMillis() - maintenant.getTimeInMillis();
 
             // Mise en place du compteur (on le rafraîchit toutes les secondes)
-            counter = new MonCompteur(diff, 1000);
+            counter = new MonCompteur(diff);
             counter.start();
         }
     }
@@ -199,11 +205,10 @@ public class CountDownActivity extends Activity {
         /**
          * Constructeur classique
          *
-         * @param millisInFuture    : durée du compte à rebours
-         * @param countDownInterval : fréquence d'actualisation
+         * @param millisInFuture : durée du compte à rebours
          */
-        public MonCompteur(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
+        public MonCompteur(long millisInFuture) {
+            super(millisInFuture, (long) 1000);
         }
 
         /**
@@ -221,11 +226,11 @@ public class CountDownActivity extends Activity {
          */
         @Override
         public void onTick(long millisUntilFinished) {
-            milli = millisUntilFinished % 1000;
-            sec = ((millisUntilFinished - milli) / 1000) % 60;
-            min = ((millisUntilFinished - milli - sec) / (1000 * 60) % 60);
-            heure = ((millisUntilFinished - milli - sec - min) / (1000 * 60 * 60) % 24);
-            jour = ((millisUntilFinished - milli - sec - min - heure) / (1000 * 60 * 60 * 24));
+            long milli = millisUntilFinished % 1000;
+            long sec = ((millisUntilFinished - milli) / 1000) % 60;
+            long min = ((millisUntilFinished - milli - sec) / (1000 * 60) % 60);
+            long heure = ((millisUntilFinished - milli - sec - min) / (1000 * 60 * 60) % 24);
+            long jour = ((millisUntilFinished - milli - sec - min - heure) / (1000 * 60 * 60 * 24));
             tvTimer.setText(String.format("%02d", jour) + getText(R.string.jour) + " "
                     + String.format("%02d", heure) + getText(R.string.heure) + " "
                     + String.format("%02d", min) + getText(R.string.minute) + " "

@@ -1,7 +1,16 @@
 
  #### Work In Progress ####
 
- * Optimisation de l'utilisation du Calendar (refactoring Widget/Activity)
+ * Optimisation du rafraîchissement du Widget (utilisation d'un AlarmManager avec trigger si mise à jour de la date)
+    ==> cf. http://s.psyckoz.info/alarmmanager
+
+ * Optimisation de l'utilisation du Calendar (refactoring Widget/Activity) et des Préférences
+
+ * Dynamiser l'affichage du widget : afficher jours / heure / minute en fonction du temps restant + gestion heure arrondie
+    (ex. 100J 0H 58m ne doit pas s'affiche 100J 0H)
+
+ * Ajout d'un TimePicker pour choisir une heure particulière
+    ==> cf. http://code.google.com/p/datetimepicker/
 
 [DONE] * Internationaliser les chaines et fichiers d'aide HTML
 [DONE] * Gestion de la date depuis un menu de préférence

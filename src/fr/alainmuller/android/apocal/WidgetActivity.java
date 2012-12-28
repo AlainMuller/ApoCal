@@ -21,18 +21,14 @@ import java.util.*;
  */
 public class WidgetActivity extends AppWidgetProvider {
 
-    private static final String LOG_TAG = "ApoCal - WidgetActivity";
-    // On récupère la date de fin depuis les préférences
-    SharedPreferences prefs = null;
-    int prefsAnnee, prefsMois, prefsJour, prefsHeure, prefsMinute, prefsSeconde;
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         /* Paramétrage du Widget (rafraîchissement) */
         // Utilisation d'un Timer pour gérer le rafraîchissement du widget
         Timer timer = new Timer();
-        // Rafraîchissement prévu toutes les minutes
-        timer.scheduleAtFixedRate(new MyTime(context, appWidgetManager), 1, 10000);
+        // TODO : Utiliser un AlarmManager pour rafraîchir le widget
+        // Rafraîchissement prévu toutes les 30 secondes (meilleur compromis niveau perfs)
+        timer.scheduleAtFixedRate(new MyTime(context, appWidgetManager), 1, 30000);
 
         /* Gestion du click sur le Widget */
         // Récupération de l'élément
@@ -50,10 +46,10 @@ public class WidgetActivity extends AppWidgetProvider {
      * InnerClass permettant de mettre à jour le Widget avec le temps restant.
      */
     private class MyTime extends TimerTask {
-        RemoteViews remoteViews;
-        AppWidgetManager appWidgetManager;
-        ComponentName thisWidget;
-        Context contexte;
+        final RemoteViews remoteViews;
+        final AppWidgetManager appWidgetManager;
+        final ComponentName thisWidget;
+        final Context contexte;
 
         public MyTime(Context context, AppWidgetManager appWidgetManager) {
             this.appWidgetManager = appWidgetManager;
@@ -67,13 +63,14 @@ public class WidgetActivity extends AppWidgetProvider {
         @Override
         public void run() {
             // Chargement des données depuis les préférences
-            prefs = PreferenceManager.getDefaultSharedPreferences(contexte);
-            prefsAnnee = prefs.getInt("annee", 2038);
-            prefsMois = prefs.getInt("mois", 0);
-            prefsJour = prefs.getInt("jour", 19);
-            prefsHeure = prefs.getInt("heure", 3);
-            prefsMinute = prefs.getInt("minute", 14);
-            prefsSeconde = prefs.getInt("seconde", 7);
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contexte);
+            int prefsAnnee = prefs.getInt("annee", 2038);
+            int prefsMois = prefs.getInt("mois", 0);
+            int prefsJour = prefs.getInt("jour", 19);
+            int prefsHeure = prefs.getInt("heure", 3);
+            int prefsMinute = prefs.getInt("minute", 14);
+            int prefsSeconde = prefs.getInt("seconde", 7);
 
             Calendar fin = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
             fin.set(Calendar.YEAR, prefsAnnee);

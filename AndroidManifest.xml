@@ -9,7 +9,7 @@
 
     <application android:label="@string/app_name"
                  android:icon="@drawable/ic_launcher_icon"
-                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+                 android:theme="@style/myTheme">
 
         <!-- Définition du widget -->
         <receiver android:name=".WidgetActivity"

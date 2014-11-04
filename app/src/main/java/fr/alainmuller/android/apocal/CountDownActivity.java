@@ -20,8 +20,10 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 
+import io.fabric.sdk.android.Fabric;
 import org.joda.time.DateTime;
 
 import java.util.Calendar;
@@ -55,6 +57,7 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.main);
 
         // On récupère les élément du Layout

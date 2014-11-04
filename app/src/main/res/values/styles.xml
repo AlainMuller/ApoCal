@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="myTheme" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+    <style name="myTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
     </style>

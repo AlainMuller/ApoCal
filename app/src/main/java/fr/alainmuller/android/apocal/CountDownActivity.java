@@ -60,9 +60,6 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
         // On récupère les élément du Layout
         tvTimer = (TextView) findViewById(R.id.timer);
 
-        // Chargement de la date de fin du monde depuis les préférences
-        chargeDateFin();
-
         // Bouton Préférences : affichage d'un DatePickerDialog pour MàJ date de fin du monde
         ibPrefs = (ImageButton) findViewById(R.id.ibPrefs);
         ibPrefs.setOnClickListener(new OnClickListener() {
@@ -74,7 +71,6 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
                         .newInstance(CountDownActivity.this, now.getYear(), now.getMonthOfYear() - 1,
                                 now.getDayOfMonth());
                 calendarDatePickerDialog.show(fm, LOG_TAG);
-                chargeDateFin();
                 showHideMenu();
             }
         });
@@ -100,6 +96,13 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
             }
         });
 
+        // Chargement de la date et démarrage du décompteur
+        updateDate();
+    }
+
+    private void updateDate() {
+        // Chargement de la date de fin du monde depuis les préférences
+        chargeDateFin();
         // Démarrage du décompteur
         startCountdown();
     }
@@ -108,9 +111,11 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
     public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int monthOfYear, int dayOfMonth) {
         Log.d(LOG_TAG, "Mise à jour de la date : " + dayOfMonth + "/" + monthOfYear + "/" + year + ")");
         // Persistance de la date saisie dans les préférences
-        prefs.edit().putInt("annee", year).commit();
-        prefs.edit().putInt("mois", monthOfYear).commit();
-        prefs.edit().putInt("jour", dayOfMonth).commit();
+        prefs.edit().putInt("annee", year).apply();
+        prefs.edit().putInt("mois", monthOfYear).apply();
+        prefs.edit().putInt("jour", dayOfMonth).apply();
+        // Mise à jour de l'affichage
+        updateDate();
     }
 
     @Override

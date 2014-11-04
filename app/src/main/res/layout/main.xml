@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rlMain"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+                android:id="@+id/rlMain"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
     <ImageView
         android:id="@+id/img"
@@ -11,29 +11,31 @@
         android:layout_width="fill_parent"
         android:src="@drawable/background"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/description_background" />
+        android:contentDescription="@string/description_background"/>
 
     <ImageButton
         android:id="@+id/ibPrefs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_menu_preferences"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_stat_action_event"
         android:background="@null"
         android:contentDescription="@string/iconPrefs"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <ImageButton
         android:id="@+id/ibAide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:src="@drawable/ic_menu_help"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_stat_action_info_outline"
         android:background="@null"
         android:contentDescription="@string/iconAide"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -46,13 +48,13 @@
             android:id="@+id/entete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="@color/entete"
             android:shadowColor="@color/entete_shadow"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="2"
-            android:text="@string/message" />
+            android:text="@string/message"/>
 
         <TextView
             android:id="@+id/timer"
@@ -64,8 +66,8 @@
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="3"
-            android:textSize="32dp"
-            android:textStyle="bold" />
+            android:textSize="32sp"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </RelativeLayout>

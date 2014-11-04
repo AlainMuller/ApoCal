@@ -109,7 +109,7 @@ public class CountDownActivity extends FragmentActivity implements CalendarDateP
 
     @Override
     public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int monthOfYear, int dayOfMonth) {
-        Log.d(LOG_TAG, "Mise à jour de la date : " + dayOfMonth + "/" + monthOfYear + "/" + year + ")");
+        Log.d(LOG_TAG, "Mise à jour de la date : " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year + ")");
         // Persistance de la date saisie dans les préférences
         prefs.edit().putInt("annee", year).apply();
         prefs.edit().putInt("mois", monthOfYear).apply();

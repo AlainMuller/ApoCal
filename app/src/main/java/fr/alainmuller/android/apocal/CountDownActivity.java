@@ -1,12 +1,13 @@
 package fr.alainmuller.android.apocal;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +20,10 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
+
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -30,7 +35,7 @@ import java.util.TimeZone;
  * Time: 17:28          ==> installations actives/totales le 21/12/2012 : 1 500 / 2 500 ^_^
  * Activity permettant de tracer un compte à rebours en se basant sur la date de l'apocalypse selon le calendrier Maya
  */
-public class CountDownActivity extends Activity {
+public class CountDownActivity extends FragmentActivity implements CalendarDatePickerDialog.OnDateSetListener {
 
     private static final String LOG_TAG = "ApoCal - CountDownActivity";
     private TextView tvTimer = null;
@@ -58,62 +63,54 @@ public class CountDownActivity extends Activity {
         // Chargement de la date de fin du monde depuis les préférences
         chargeDateFin();
 
-        // TODO : Utilisation d'un DateTimePicker pour choisir une heure particulière en plus de la date
         // Bouton Préférences : affichage d'un DatePickerDialog pour MàJ date de fin du monde
         ibPrefs = (ImageButton) findViewById(R.id.ibPrefs);
         ibPrefs.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                MonDatePickerDialog datePickerDialog = new MonDatePickerDialog(view.getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i2, int i3) {
-                        Log.d(LOG_TAG, "Mise à jour de la date : " + datePicker.toString() + "(" + i + "/" + i2 + "/" + i3 + ")");
-                        // Persistance de la date saisie dans les préférences
-                        prefs.edit().putInt("annee", datePicker.getYear()).commit();
-                        prefs.edit().putInt("mois", datePicker.getMonth()).commit();
-                        prefs.edit().putInt("jour", datePicker.getDayOfMonth()).commit();
-                        // Par défaut, on met l'heure à 00:00:00 si on a choisi une date
-                        prefs.edit().putInt("heure", 0).commit();
-                        prefs.edit().putInt("minute", 0).commit();
-                        prefs.edit().putInt("seconde", 0).commit();
-                        // Mise à jour des préférences et du compteur
-                        chargeDateFin();
-                        startCountdown();
-                    }
-                }, prefsAnnee, prefsMois, prefsJour);
-                datePickerDialog.setPermanentTitle(getString(R.string.pickDate));
-                datePickerDialog.show();
+                FragmentManager fm = getSupportFragmentManager();
+                DateTime now = DateTime.now();
+                CalendarDatePickerDialog calendarDatePickerDialog = CalendarDatePickerDialog
+                        .newInstance(CountDownActivity.this, now.getYear(), now.getMonthOfYear() - 1,
+                                now.getDayOfMonth());
+                calendarDatePickerDialog.show(fm, LOG_TAG);
+                chargeDateFin();
                 showHideMenu();
             }
         });
 
         // Bouton Aide
         ibAide = (ImageButton) findViewById(R.id.ibAide);
-        ibAide.setOnClickListener(new
-
-                                          OnClickListener() {
-                                              @Override
-                                              public void onClick(View view) {
-                                                  HelpDialog helpDialog = new HelpDialog(view.getContext());
-                                                  helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                                  helpDialog.show();
-                                                  showHideMenu();
-                                              }
-                                          });
+        ibAide.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HelpDialog helpDialog = new HelpDialog(view.getContext());
+                helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                helpDialog.show();
+                showHideMenu();
+            }
+        });
 
         // Gestion du clic sur l'Activity : afficher / masquer les boutons
         RelativeLayout rlMain = (RelativeLayout) findViewById(R.id.rlMain);
-        rlMain.setOnClickListener(new
-
-                                          OnClickListener() {
-                                              @Override
-                                              public void onClick(View view) {
-                                                  showHideMenu();
-                                              }
-                                          });
+        rlMain.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showHideMenu();
+            }
+        });
 
         // Démarrage du décompteur
         startCountdown();
+    }
+
+    @Override
+    public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int monthOfYear, int dayOfMonth) {
+        Log.d(LOG_TAG, "Mise à jour de la date : " + dayOfMonth + "/" + monthOfYear + "/" + year + ")");
+        // Persistance de la date saisie dans les préférences
+        prefs.edit().putInt("annee", year).commit();
+        prefs.edit().putInt("mois", monthOfYear).commit();
+        prefs.edit().putInt("jour", dayOfMonth).commit();
     }
 
     @Override

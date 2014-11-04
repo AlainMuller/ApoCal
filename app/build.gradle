@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.0.2"
+
+    defaultConfig {
+        applicationId "fr.alainmuller.android.apocal"
+        minSdkVersion 9
+        targetSdkVersion 21
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    dependencies {
+        compile 'com.android.support:support-v4:21.0.+'
+        // JODA time library
+        compile 'net.danlew:android.joda:2.5.0'
+        // BetterPickers for DatePicker
+        compile("com.doomonafireball.betterpickers:library:1.5.2") {
+            exclude group: 'com.android.support', module: 'support-v4'
+        }
+    }
+}
